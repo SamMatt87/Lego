@@ -1,6 +1,6 @@
 import requests
 from typing import Dict, List
-from austhorisation import Authorisation
+from authorisation import Authorisation
 
 url = "https://rebrickable.com"
 
