@@ -39,7 +39,7 @@ def unique_parts(set: str) -> int:
     return len(response.json()['results'])
 
 def moc_count(set: str) -> int:
-    operation = f"/api/v3/lego/sets/{set}/alternates/?page_size=1000"
+    operation = f"/api/v3/lego/sets/{set}/alternates/?page_size=100"
     full_url = f"{url}{operation}"
     response = requests.get(full_url, headers=header)
     return len(response.json()['results'])

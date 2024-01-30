@@ -1,1 +1,3 @@
 authorisation.py
+*.png
+__pycache__
