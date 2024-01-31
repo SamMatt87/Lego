@@ -11,14 +11,14 @@ year_count: Dict[int, int] = {}
 for year in range(1999,2025):
     year_count[year] = 0
 part_count: Dict[int,int] = {}
-unique_parts: Dict[float, int] = {}
+unique_parts: Dict[str, int] = {}
 moc_counts: Dict[int,int]={}
 for hundred in range(0,1100,100):
     part_count[hundred] = 0
 for thousand in range(2000,11000,1000):
     part_count[thousand] = 0
 for percentage in range(0,11,1):
-    unique_parts[percentage/10] = 0
+    unique_parts[f"{percentage*10}%"] = 0
 for count in range(0,41):
     moc_counts[count] = 0
 for theme in themes:
@@ -31,7 +31,7 @@ for theme in themes:
         else:
             part_count[int(np.floor(set['num_parts']/1000))*1000] += 1
         if set['num_parts']>0:
-            unique_parts[np.round((rebrickable_api.unique_parts(set['set_num'])/set['num_parts']),1)]+=1
+            unique_parts[f"{int(np.round((rebrickable_api.unique_parts(set['set_num'])/set['num_parts']),1)*100)}%"]+=1
         else:
             print(set)
         time.sleep(1)
@@ -45,12 +45,15 @@ print(sum(year_count.values()))
 print(sum(part_count.values()))
 print(sum(unique_parts.values()))
 print(sum(moc_counts.values()))
-def plot(data: Dict[int,int]) -> None:
+def plot(data: Dict[int,int], variable: str) -> None:
     plt.bar(range(len(data)), list(data.values()), align="center")
     plt.xticks(range(len(data)), list(data.keys()))
+    plt.title(f"Count vs. {variable}")
+    plt.ylabel("Count")
+    plt.xlabel(variable)
     plt.show()
 
-plot(year_count)
-plot(part_count)
-plot(unique_parts)
-plot(moc_counts)
+plot(year_count, "Release Year")
+plot(part_count, "Number of Parts")
+plot(unique_parts, "Unique Parts %")
+plot(moc_counts, "MOCs")
