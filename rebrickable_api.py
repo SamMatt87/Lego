@@ -47,6 +47,6 @@ def moc_count(set: str) -> int:
 
 if __name__ == "__main__":
     print(show_themes("star wars"))
-    print(show_sets(171))
+    print(show_sets(158))
     print(unique_parts("75252-1"))
     print(moc_count("912055-1"))
